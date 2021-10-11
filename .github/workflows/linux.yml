@@ -13,13 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: download and unzip the linux repository 
+      - name: download and unzip
         run: 
-          wget https://github.com/citade1/linux/archive/linux-$(git rev-parse @:./linux).zip
-          unzip linux-$(git rev-parse @:./linux).zip
+          wget https://github.com/citade1/linux/archive/$(git rev-parse @:./linux).zip
+          unzip $(git rev-parse @:./linux).zip
       
-      - name: build the downloaded linux repoistory
+      - name: build 
         shell: bash
         run: |
           ./install-deps.sh
-          ./build-linux.sh linux-$(git rev-parse @:./linux) tinyconfig
+          ./build-linux.sh ./linux-$(git rev-parse @:./linux) tinyconfig
