@@ -3,8 +3,9 @@ name: Checking clean build of the downstream linux tree
 
 on:
   push:
+    branches: [ main ]
     paths: 
-      - "linux"
+      - 'linux'
 
 jobs:
   build:
@@ -19,7 +20,6 @@ jobs:
           unzip $(git rev-parse @:./linux).zip
       
       - name: build 
-        shell: bash
         run: |
           ./install-deps.sh
-          ./build-linux.sh ./linux-$(git rev-parse @:./linux) tinyconfig
+          ./build-linux.sh linux-$(git rev-parse @:./linux) tinyconfig
