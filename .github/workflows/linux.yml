@@ -20,17 +20,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: download the linux repository 
+      - name: download and unzip the linux repository 
         run: 
           COMMIT = `git rev-parse @:./linux`
           wget https://github.com/citade1/linux/archive/$COMMIT.zip
-
-      - name: install dependencies
-        run: |
-          shell: bash
-          ./install-deps.sh
+          unzip linux-$COMMIT.zip
       
       - name: build the downloaded linux repoistory
         run: |
           COMMIT = `git rev-parse @:./linux`
-          ./build-linux.sh ./linux-$COMMIT tinyconfig
+          ./install-deps.sh
+          ./build-linux.sh linux-$COMMIT tinyconfig
