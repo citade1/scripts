@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: download and unzip
-        run: 
+        run: |
           wget https://github.com/citade1/linux/archive/$(git rev-parse @:./linux).zip
           unzip $(git rev-parse @:./linux).zip
       
